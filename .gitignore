@@ -1,0 +1,17 @@
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
+# Rendered strips
+*.png
+!examples/*.png
+
+# Test/coverage artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Nix
+.direnv/
+result

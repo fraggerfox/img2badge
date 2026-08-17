@@ -1,0 +1,41 @@
+[project]
+name = "img2badge"
+version = "0.1.0"
+description = "Images (or parts of them) to LED badge strip PNGs — mask, scale, binarize, hand-tune"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "pillow",
+]
+
+[project.scripts]
+img2badge = "img2badge.cli:main"
+
+[dependency-groups]
+dev = [
+    "black",
+    "pytest",
+    "pytest-cov",
+    # ruff comes from nixpkgs (the pip wheel is dynamically linked and
+    # does not run on NixOS); its config below applies either way.
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=img2badge --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+# PEP 8 (pycodestyle E/W), pyflakes (F), import sorting (I), pyupgrade (UP)
+select = ["E", "F", "W", "I", "UP"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
