@@ -1,0 +1,39 @@
+version: 2
+updates:
+  # GitHub Actions used in workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Conventional Commits title (ci(deps): ...) so the PR-title check
+    # passes and release-please files it under CI in the changelog.
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    pull-request-branch-name:
+      separator: '-'
+    groups:
+      stable-updates:
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+
+  # Python dependencies (pyproject.toml + uv.lock)
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Conventional Commits title (build(deps): ...) — dependency bumps
+    # are build-system changes; no release-please version bump.
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    pull-request-branch-name:
+      separator: '-'
+    groups:
+      stable-updates:
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
