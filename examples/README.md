@@ -18,6 +18,19 @@ tiny 11 px conversion demos.
 | `hellofresh.png` (57×11) | `img2badge hellofresh-logo.png --mask 'color=#91c11e,90' --append name.png` | color mask isolates the lemon from the dark wordmark |
 | `quake.png` (10×11) | `img2badge quake.png --crop 0,0,447,400 --mask luma --invert --dilate 13` | white-on-black wants --invert; crop the ™; dilate saves the thin crescent |
 | `unreal.png` (11×11) | `img2badge ue-emblem.png` | the classic circle emblem converts square-on; the U survives in negative space |
+| `foxhound.png` (10×11) | `img2badge foxhound.png -t 0.35` | four overlapping shapes fuse at 11 px — the case where auto-conversion needs hand-tuning |
+| `apple.png` (9×11) | `img2badge apple.png` | a solid square-ish mark just works with the defaults |
 
-Every one of these is also a hand-tuning candidate: re-run with
-`--art strip.txt`, fix pixels, rebuild with `img2badge strip.txt`.
+## Editable art
+
+Each strip's ●/· text art is committed alongside it (`<name>.txt`) in
+the space-separated format — one lit/dark cell per pixel, spaces as
+visual separators so the art reads at true proportions in an editor.
+Edit the `.txt`, then rebuild its PNG:
+
+```sh
+img2badge examples/quake.txt -o examples/quake.png --dots
+```
+
+The `.txt` is the source of truth once you start editing — re-running
+the image conversion would overwrite your pixels.
