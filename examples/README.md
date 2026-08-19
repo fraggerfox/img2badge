@@ -10,8 +10,7 @@ copies are not kept in the repo.
 Layout: `originals/` holds the source logos, `art/` the editable ●/·
 strips, and the top level the badge-ready PNGs. The logos are
 trademarks of their respective owners, included only as sources for
-these tiny 11 px conversion demos. (The apple example's original was
-not preserved — only its strip and art remain.)
+these tiny 11 px conversion demos.
 
 | Strip | Command (icon part) | Lesson |
 |---|---|---|
@@ -21,7 +20,7 @@ not preserved — only its strip and art remain.)
 | `quake.png` (10×11) | `img2badge originals/quake.png --crop 0,0,447,400 --mask luma --invert --dilate 13` | white-on-black wants --invert; crop the ™; dilate saves the thin crescent |
 | `unreal.png` (11×11) | `img2badge originals/unreal-tournament.png` | the classic circle emblem converts square-on; the U survives in negative space |
 | `fox.png` (10×11) † | `img2badge originals/fox.png -t 0.35` | four overlapping shapes fuse at 11 px — the case where auto-conversion needs hand-tuning |
-| `apple.png` (9×11) | `img2badge apple.png` | a solid square-ish mark just works with the defaults |
+| `apple.png` (9×11) | `img2badge originals/apple.png` | a solid square-ish mark just works with the defaults |
 
 † **hand-tuned**: the FreeBSD and fox strips were edited pixel-by-pixel
 after conversion; their `art/*.txt` files are the source of truth, and
