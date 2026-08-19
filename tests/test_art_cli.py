@@ -33,6 +33,14 @@ def test_art_accepts_ascii_aliases(tmp_path):
     assert grid.tolist() == [[True, False, True], [False, True, False]]
 
 
+def test_spaced_and_compact_formats_read_identically(tmp_path):
+    spaced = tmp_path / "spaced.txt"
+    compact = tmp_path / "compact.txt"
+    spaced.write_text("\u25cf \u00b7 \u25cf\n\u00b7 \u25cf \u00b7\n", encoding="utf-8")
+    compact.write_text("\u25cf\u00b7\u25cf\n\u00b7\u25cf\u00b7\n", encoding="utf-8")
+    assert np.array_equal(read_art(spaced), read_art(compact))
+
+
 def test_art_rejects_junk(tmp_path):
     p = tmp_path / "bad.txt"
     p.write_text("●x●\n", encoding="utf-8")
