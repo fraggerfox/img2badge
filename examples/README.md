@@ -3,7 +3,9 @@
 Real logo conversions, regenerated with img2badge. Wordmark strips come
 from [font2badge](https://github.com/fraggerfox/font2badge)
 (`font2badge k8x12.ttf "<Name>" --ppem 12 --mono`) and are composed with
-`--append`. The `@8x` copies are nearest-neighbour zooms for viewing.
+`--append`. To view a strip at a readable size, generate a zoom copy
+on demand (`img2badge <strip>.txt --zoom 8 -o /tmp/view.png`) — zoom
+copies are not kept in the repo.
 
 Logo sources are the freely-hosted variants (Wikimedia/site assets);
 they are trademarks of their respective owners, reproduced here only as
