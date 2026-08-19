@@ -185,5 +185,7 @@ def save_zoom(bits: np.ndarray, path, factor: int) -> None:
 def print_dots(bits: np.ndarray, file=None) -> None:
     # Resolve stdout at call time (a default arg would bind the import-time
     # stream and bypass pytest's capsys / any later redirection).
+    # Two columns per pixel: terminal cells are ~2x taller than wide, so a
+    # one-char-per-pixel grid renders horizontally squished.
     for row in bits:
-        print("".join("●" if v else "·" for v in row), file=file or sys.stdout)
+        print(" ".join("●" if v else "·" for v in row), file=file or sys.stdout)

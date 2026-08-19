@@ -100,6 +100,12 @@ img2badge logo.txt -o logo.png        # rebuild the PNG from your edit
 The art format is the same ●/· grid pixelshaper uses for glyphs (`#`/`.`
 are accepted as ASCII aliases), so edits diff cleanly in git.
 
+Note on aspect: the `.txt` stores **one character per pixel**, and
+terminal/editor cells are ~2x taller than wide, so the art looks
+horizontally squished while editing — the PNG is not. `--dots` prints
+two columns per pixel to compensate; use it to judge proportions, and
+the `.txt` to edit.
+
 ## Examples
 
 See [examples/](examples/) for real conversions (NetBSD, FreeBSD,
