@@ -6,6 +6,8 @@ __pycache__/
 # Rendered strips
 *.png
 !examples/*.png
+# ...but zoom copies are viewing aids — regenerate with --zoom
+examples/*@*.png
 
 # Test/coverage artifacts
 .coverage
