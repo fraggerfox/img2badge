@@ -20,12 +20,12 @@ these tiny 11 px conversion demos.
 | `quake.png` (10×11) | `img2badge originals/quake.png --crop 0,0,447,400 --mask luma --invert --dilate 13` | white-on-black wants --invert; crop the ™; dilate saves the thin crescent |
 | `unreal.png` (11×11) | `img2badge originals/unreal-tournament.png` | the classic circle emblem converts square-on; the U survives in negative space |
 | `fox.png` (10×11) † | `img2badge originals/fox.png -t 0.35` | four overlapping shapes fuse at 11 px — the case where auto-conversion needs hand-tuning |
-| `apple.png` (9×11) | `img2badge originals/apple.png` | a solid square-ish mark just works with the defaults |
+| `apple.png` (9×11) † | `img2badge originals/apple.png` | a solid square-ish mark just works with the defaults; the bite was added by hand |
 
-† **hand-tuned**: the FreeBSD and fox strips were edited pixel-by-pixel
-after conversion; their `art/*.txt` files are the source of truth, and
-re-running the conversion command would overwrite those edits. Compare
-`git log -p art/freebsd.txt` to see the tuning.
+† **hand-tuned**: the FreeBSD, fox and apple strips were edited
+pixel-by-pixel after conversion; their `art/*.txt` files are the source
+of truth, and re-running the conversion command would overwrite those
+edits. Compare `git log -p art/freebsd.txt` to see the tuning.
 
 ## Editable art
 
