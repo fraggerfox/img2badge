@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from img2badge.convert import append_strips, convert
+from img2badge.convert import append_strips, convert, ink_from_image, profile_ink
 
 
 def test_dark_on_light_fills_the_strip(dark_circle):
@@ -99,3 +99,20 @@ def test_append_joins_and_validates():
     assert not joined[:, 5:7].any()  # the gap is dark
     with pytest.raises(SystemExit, match="heights differ"):
         append_strips([a, np.ones((9, 3), bool)])
+
+
+def test_profile_reports_bbox_and_crop(dark_circle):
+    from PIL import Image
+
+    ink = ink_from_image(Image.open(dark_circle))
+    out = profile_ink(ink)
+    # the fixture draws the circle at [40,40]..[160,160] on 200x200
+    assert "image 200x200" in out
+    assert "--crop 40,40,121,121" in out
+    assert "rows:" in out and "cols:" in out
+
+
+def test_profile_empty_image():
+    import numpy as np
+
+    assert "no ink" in profile_ink(np.zeros((10, 10), np.uint8))

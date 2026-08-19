@@ -57,6 +57,7 @@ python3 lednamebadge.py -s 4 -m 4 strip.png   # mode 4 = still-centered
 | `--gap N` | 3 | dark columns between joined strips |
 | `--zoom N` | 0 | also write an `@Nx` nearest-neighbour copy for viewing |
 | `--dots` | off | print the strip as ●/· rows |
+| `--profile` | off | print the masked image's row/column ink histogram + suggested `--crop`, then exit (find crop coordinates; watermarks and faint junk show up here) |
 
 ## The recipe that works for logos
 
@@ -81,7 +82,9 @@ Mask cheat-sheet, from real logos:
   darkness gated by alpha, the default just works.
 - **colored mark next to a wordmark** (NetBSD flag, HelloFresh lemon):
   `--mask color=#RRGGBB,tol` picks the mark by its color.
-- **a band of the image** (a flag across the top): `--crop X,Y,W,H`.
+- **a band of the image** (a flag across the top): `--crop X,Y,W,H` —
+  run `--profile` first to read the band's coordinates off the ink
+  histogram.
 - **thin line art** (the Quake ring): add `--dilate 9` or the strokes
   break up at 11 px.
 

@@ -151,6 +151,42 @@ def convert(
     return bits[:, lo:hi]
 
 
+def profile_ink(ink: np.ndarray, bands: int = 24, width: int = 40) -> str:
+    """Row/column ink histogram + bbox, for finding --crop coordinates.
+
+    Coordinates are relative to the profiled image (i.e. to the --crop
+    region if one was applied) at the mask's own ink floor (>16), the
+    same floor the bbox trim uses — so faint junk like watermarks shows
+    up here exactly where it will distort the sizing.
+    """
+    on = ink > 16
+    if not on.any():
+        return "no ink found — check --mask/--invert"
+    h, w = on.shape
+    rows = np.where(on.any(axis=1))[0]
+    cols = np.where(on.any(axis=0))[0]
+    x, y = int(cols.min()), int(rows.min())
+    bw, bh = int(cols.max()) - x + 1, int(rows.max()) - y + 1
+    lines = [f"image {w}x{h}  ink bbox: x {x}..{x + bw - 1}, y {y}..{y + bh - 1}"]
+    lines.append(f"tight crop of all ink:  --crop {x},{y},{bw},{bh}")
+    lines.append("")
+    row_counts = on.sum(axis=1)
+    col_counts = on.sum(axis=0)
+    peak = max(row_counts.max(), 1)
+    step = max(1, h // bands)
+    lines.append("rows:")
+    for yy in range(0, h, step):
+        band = row_counts[yy : yy + step].max()
+        lines.append(f"  y {yy:5d}  {'#' * int(band * width / peak)}")
+    peak = max(col_counts.max(), 1)
+    step = max(1, w // bands)
+    lines.append("cols:")
+    for xx in range(0, w, step):
+        band = col_counts[xx : xx + step].max()
+        lines.append(f"  x {xx:5d}  {'#' * int(band * width / peak)}")
+    return "\n".join(lines)
+
+
 def append_strips(strips, gap: int = 3) -> np.ndarray:
     """Join same-height boolean strips left-to-right with dark gap columns."""
     heights = {s.shape[0] for s in strips}
