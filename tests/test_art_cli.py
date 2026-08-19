@@ -104,3 +104,10 @@ def test_cli_append_and_zoom(monkeypatch, tmp_path, dark_circle, alpha_mark):
 def test_cli_default_output_name(monkeypatch, tmp_path, dark_circle):
     run(monkeypatch, tmp_path, dark_circle)
     assert (dark_circle.parent / f"{dark_circle.stem}-badge.png").exists()
+
+
+def test_cli_profile_exits_without_writing(monkeypatch, tmp_path, dark_circle, capsys):
+    run(monkeypatch, tmp_path, dark_circle, "--profile", "-o", "never.png")
+    out = capsys.readouterr().out
+    assert "--crop" in out and "rows:" in out
+    assert not (tmp_path / "never.png").exists()

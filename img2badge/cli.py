@@ -1,12 +1,16 @@
 import argparse
 from pathlib import Path
 
+from PIL import Image
+
 from img2badge.art import read_art, write_art
 from img2badge.convert import (
     append_strips,
     convert,
+    ink_from_image,
     load_strip,
     print_dots,
+    profile_ink,
     save_strip,
     save_zoom,
 )
@@ -100,7 +104,26 @@ def main():
         help="also write an @Nx nearest-neighbour copy for viewing",
     )
     ap.add_argument("--dots", action="store_true", help="print the strip as ●/· rows")
+    ap.add_argument(
+        "--profile",
+        action="store_true",
+        help="print the masked image's row/column ink histogram and a "
+        "suggested --crop, then exit without converting (find crop "
+        "coordinates; respects --mask/--invert/--crop)",
+    )
     args = ap.parse_args()
+
+    if args.profile:
+        if args.input.suffix == ".txt":
+            raise SystemExit("--profile needs an image input, not art")
+        img = Image.open(args.input)
+        if args.crop is not None:
+            x, y, w, h = args.crop
+            img = img.crop((x, y, x + w, y + h))
+            print(f"(coordinates relative to --crop {x},{y},{w},{h})")
+        ink = ink_from_image(img, mask=args.mask, invert=args.invert)
+        print(profile_ink(ink))
+        return
 
     if args.input.suffix == ".txt":
         bits = read_art(args.input)
