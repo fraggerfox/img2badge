@@ -129,3 +129,7 @@ The one thing no converter can add is information: at 11 px every pixel
 is load-bearing, and fine detail (thin rings, small text, interior
 cutouts) needs either `--dilate`, a wider layout, or the hand-tuning
 round trip above.
+
+## License
+
+[BSD 2-Clause](LICENSE)
