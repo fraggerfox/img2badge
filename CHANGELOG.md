@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.2](https://github.com/fraggerfox/img2badge/compare/img2badge-v0.1.1...img2badge-v0.1.2) (2026-09-05)
+
+
+### Documentation
+
+* add CLAUDE.md orientation for agent sessions ([#10](https://github.com/fraggerfox/img2badge/issues/10)) ([87b5c06](https://github.com/fraggerfox/img2badge/commit/87b5c06ce16920a799b5e25b0a94aa613cc54ccc))
+* link the BSD 2-Clause license from the README ([#8](https://github.com/fraggerfox/img2badge/issues/8)) ([aaf2b1c](https://github.com/fraggerfox/img2badge/commit/aaf2b1c9f5ceb4cc1414f322722afa11c8ae244e))
+
 ## [0.1.1](https://github.com/fraggerfox/img2badge/compare/img2badge-v0.1.0...img2badge-v0.1.1) (2026-08-19)
 
 
